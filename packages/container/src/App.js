@@ -1,13 +1,16 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Marketing from './components/Marketing';
+import Header from './components/Header';
 
 const App = () => {
   return (
-    <div>
-      <h1>Container!</h1>
-      <hr />
-      <Marketing />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Header />
+        <Marketing />
+      </div>
+    </BrowserRouter>
   );
 };
 
