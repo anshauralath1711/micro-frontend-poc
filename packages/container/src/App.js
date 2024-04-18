@@ -36,7 +36,7 @@ const App = () => {
                 <AuthLazy />
               </Route>
               <Route path='/dashboard'>
-                {!useStore?.userInfo && <Redirect to='/' />}
+                {!useStore?.userInfo === null && <Redirect to='/' />}
                 <DashboardLazy />
               </Route>
               <Route exact path='/' component={MarketingLazy} />
