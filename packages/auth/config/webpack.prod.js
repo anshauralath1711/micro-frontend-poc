@@ -15,7 +15,7 @@ const prodConfig = {
       name: 'auth',
       filename: 'remoteEntry.js',
       remotes: {
-        store: `store@${domain}/remoteEntry.js`,
+        store: `dashboard@${domain}/store/latest/remoteEntry.js`,
       },
       exposes: {
         './AuthApp': './src/bootstrap',

@@ -9,7 +9,7 @@ import Signup from './components/Signup';
 const generateClassName = createGenerateClassName({
   productionPrefix: 'auth',
 });
-// hello
+
 const App = ({ history, onSignIn }) => {
   return (
     <StoreProvider>
