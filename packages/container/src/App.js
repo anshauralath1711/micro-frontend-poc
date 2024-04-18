@@ -8,7 +8,7 @@ import Progress from './components/Progress';
 const MarketingLazy = lazy(() => import('./components/Marketing'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const DashboardLazy = lazy(() => import('./components/DashboardApp'));
-
+import { useStore } from 'store/store';
 const generateClassName = createGenerateClassName({
   productionPrefix: 'container',
 });
@@ -16,26 +16,35 @@ const generateClassName = createGenerateClassName({
 const history = createBrowserHistory();
 
 const App = () => {
+  const { userStore } = useStore();
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
-    if (isSignedIn) {
+    if (userStore?.userInfo !== null) {
       history.push('/dashboard');
     }
-  }, [isSignedIn]);
+  }, [userStore.userInfo]);
+
+  useEffect(() => {
+    if (userStore?.userInfo !== null) {
+      setIsSignedIn(true);
+    } else {
+      setIsSignedIn(false);
+    }
+  }, [useStore?.userInfo]);
 
   return (
     <Router history={history}>
       <StylesProvider generateClassName={generateClassName}>
         <div>
-          <Header signedIn={isSignedIn} onSignOut={() => setIsSignedIn(false)} />
+          <Header />
           <Suspense fallback={<Progress />}>
             <Switch>
               <Route path='/auth'>
-                <AuthLazy onSignIn={() => setIsSignedIn(true)} />
+                <AuthLazy />
               </Route>
               <Route path='/dashboard'>
-                {!isSignedIn && <Redirect to='/' />}
+                {!useStore?.userInfo && <Redirect to='/' />}
                 <DashboardLazy />
               </Route>
               <Route exact path='/' component={MarketingLazy} />

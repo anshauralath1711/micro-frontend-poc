@@ -1,0 +1,12 @@
+{
+    "name": "packages",
+    "version": "1.0.0",
+    "scripts": {
+        "auth": "cd auth && npm start",
+        "container": "cd container && npm start",
+        "dashboard": "cd dashboard && npm start",
+        "marketing": "cd marketing && npm start",
+        "store": "cd store && npm start",
+        "start": "concurrently \"npm run auth\" \"npm run container\" \"npm run store\" \"npm run marketing\" \"npm run dashboard\""
+    }
+}

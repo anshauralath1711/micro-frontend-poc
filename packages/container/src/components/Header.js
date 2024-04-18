@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
 
+import { useStore } from 'store/store';
+
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -32,9 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardHeader: {
     backgroundColor:
-      theme.palette.type === 'light'
-        ? theme.palette.grey[200]
-        : theme.palette.grey[700],
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[700],
   },
   cardPricing: {
     display: 'flex',
@@ -54,42 +54,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({ signedIn, onSignOut }) {
+export default function Header() {
   const classes = useStyles();
+  const { userStore, dispatch, loggedOut } = useStore();
 
   const onClick = () => {
-    if (signedIn && onSignOut) {
-      onSignOut();
+    if (userStore?.userInfo !== null) {
+      dispatch(loggedOut());
     }
   };
 
   return (
     <React.Fragment>
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        className={classes.appBar}
-      >
+      <AppBar position='static' color='default' elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography
-            variant="h6"
-            color="inherit"
-            noWrap
-            component={RouterLink}
-            to="/"
-          >
+          <Typography variant='h6' color='inherit' noWrap component={RouterLink} to='/'>
             App
           </Typography>
           <Button
-            color="primary"
-            variant="outlined"
+            color='primary'
+            variant='outlined'
             className={classes.link}
             component={RouterLink}
-            to={signedIn ? '/' : '/auth/signin'}
-            onClick={onClick}
-          >
-            {signedIn ? 'Logout' : 'Login'}
+            to={userStore.userInfo !== null ? '/' : '/auth/signin'}
+            onClick={onClick}>
+            {userStore.userInfo !== null ? 'Logout' : 'Login'}
           </Button>
         </Toolbar>
       </AppBar>

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { StoreProvider } from 'store/store';
+import { StoreProvider } from './store';
 
 ReactDOM.render(
   <StoreProvider>
     <App />
   </StoreProvider>,
-  document.querySelector('#root')
+  document.getElementById('_store-dev')
 );
