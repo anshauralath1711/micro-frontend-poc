@@ -17,21 +17,12 @@ const history = createBrowserHistory();
 
 const App = () => {
   const { userStore } = useStore();
-  const [isSignedIn, setIsSignedIn] = useState(false);
 
   useEffect(() => {
     if (userStore?.userInfo !== null) {
       history.push('/dashboard');
     }
   }, [userStore.userInfo]);
-
-  useEffect(() => {
-    if (userStore?.userInfo !== null) {
-      setIsSignedIn(true);
-    } else {
-      setIsSignedIn(false);
-    }
-  }, [useStore?.userInfo]);
 
   return (
     <Router history={history}>

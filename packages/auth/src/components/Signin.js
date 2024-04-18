@@ -52,12 +52,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ onSignIn }) {
+export default function SignIn() {
   const classes = useStyles();
-  const { signIn, loggedOutAction, dispatch, userStore } = useStore();
+  const { signIn, dispatch } = useStore();
 
   const handleSignIn = () => {
-    console.log('Hello');
     dispatch(signIn({ email: 'test', password: 'test' }));
   };
 
