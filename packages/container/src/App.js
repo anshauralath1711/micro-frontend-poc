@@ -1,14 +1,15 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createGenerateClassName, StylesProvider } from '@material-ui/core';
 import { createBrowserHistory } from 'history';
 import Header from './components/Header';
 import Progress from './components/Progress';
+import { useStore } from 'store/store';
 
 const MarketingLazy = lazy(() => import('./components/Marketing'));
 const AuthLazy = lazy(() => import('./components/AuthApp'));
 const DashboardLazy = lazy(() => import('./components/DashboardApp'));
-import { useStore } from 'store/store';
+
 const generateClassName = createGenerateClassName({
   productionPrefix: 'container',
 });
